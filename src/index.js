@@ -4,12 +4,13 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js"
 import bookRoutes from "./routes/bookRoutes.js"
 import {connectDB} from "./lib/db.js";
-
+import job from "./lib/cron.js";
 
 const PORT = process.env.PORT
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors());
+job.start()
 
 app.get("/", (req, res) => {
   res.send("✅ Server is alive with env");
